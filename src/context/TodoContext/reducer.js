@@ -7,6 +7,8 @@ const reducerTodo = (state, action) => {
 
     case actionsTodo.FILTER_TASK:
       return { ...state, filterTodos: action.payload };
+    case actionsTodo.ADD_TASK:
+      return { ...state , todos : [...state.todos, action.payload] };
 
     default:
       return state;

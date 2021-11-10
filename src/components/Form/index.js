@@ -1,23 +1,64 @@
+import { useContext } from "react";
 import styled from "styled-components";
+import { TodoContext } from "../../context/TodoContext";
+import { actionsTodo } from "../../context/TodoContext/actions";
 import { colors } from "../../utils/color";
-function Form() {
+import {useLocation} from "wouter";
+function Form({ setData, data }) {
+
+  const {dispatch } = useContext(TodoContext);
+  const [, setLocation] = useLocation();
+  const HandleChange = (e) => {
+    setData({ ...data, [e.target.name]: e.target.value });
+  };
+
+  const handleClickColor = (e, color) => {
+    e.preventDefault();
+    setData({ ...data, color: color });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch({
+      type: actionsTodo.ADD_TASK,
+      payload: data,
+    });
+    setLocation("/")
+
+  };
   return (
     <form>
       <GroupInput>
         <label htmlFor="titulo">Titulo</label>
-        <input type="text" id="titulo" />
+        <input
+          type="text"
+          id="titulo"
+          value={data.title}
+          name="title"
+          onChange={(e) => HandleChange(e)}
+        />
       </GroupInput>
       <GroupInput>
         <label htmlFor="descripcion">Titulo</label>
-        <input type="text" id="descripcion" />
+        <input
+          type="text"
+          id="descripcion"
+          value={data.description}
+          name="description"
+          onChange={(e) => HandleChange(e)}
+        />
       </GroupInput>
       <GroupInput>
         <label>Eliga un color:</label>
         {colors.map((color) => (
-          <StyledBtnColor color={color} />
+          <StyledBtnColor
+            key={color}
+            color={color}
+            onClick={(e) => handleClickColor(e, color)}
+          />
         ))}
       </GroupInput>
-      <StyledButton>Agregar tarea</StyledButton>
+      <StyledButton onClick={handleSubmit}>Agregar tarea</StyledButton>
     </form>
   );
 }
@@ -53,10 +94,10 @@ const StyledButton = styled.button`
   border-radius: 10px;
   font-size: 1rem;
   &:active {
-    transform: scale(.99);
+    transform: scale(0.99);
   }
-  &:hover{
-    opacity: .9;
+  &:hover {
+    opacity: 0.9;
   }
 `;
 const StyledBtnColor = styled.button`
@@ -65,5 +106,5 @@ const StyledBtnColor = styled.button`
   background-color: ${(props) => props.color};
   margin-right: 1rem;
   border-radius: 25px;
-  cursor:pointer;
+  cursor: pointer;
 `;

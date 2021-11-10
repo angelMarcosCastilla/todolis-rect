@@ -6,20 +6,21 @@ import { useState } from "react";
 
 const initialState = { 
   id:10,
-  title:"titulo",
-  description:"descripcion",
+  title:"",
+  description:"",
   color:"grey",
   isComplete:false
 
 }
 function AddTask() {
   const [form, setForm] = useState(initialState)
+
   return (
     <section>
       <Container>
         <Grid columns = {2}  gap = {"10rem"}>
-        <Form/>
-        <CardTodo todo = {initialState} />
+        <Form setData = {setForm} data = {form} />
+        <CardTodo todo = {form} />
         </Grid>
       </Container>
     </section>
