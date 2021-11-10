@@ -33,7 +33,7 @@ export const initialState = {
     id: 4,
     title: "Almorzar",
     description: "Hora de almorzar a partir de las 12",
-    color: "#7957D5",
+    color: "#FFC107",
     isComplete:true
   },
   {
