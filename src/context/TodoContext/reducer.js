@@ -12,7 +12,9 @@ const reducerTodo = (state, action) => {
     case actionsTodo.ADD_TASK:
       return { ...state, todos: [...state.todos, action.payload] };
     case actionsTodo.EDIT_TASK:
-      return  { ...state, todos:  action.payload };
+      return { ...state, todos: action.payload };
+   /*  case actionsTodo.ISCOMPLETE_TASK:
+      return { ...state, todos: action.payload }; */
     default:
       return state;
   }

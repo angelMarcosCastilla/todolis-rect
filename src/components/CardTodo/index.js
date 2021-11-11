@@ -16,7 +16,7 @@ const initialTodo = { title: "titulo", description: "descripcion", color: "#2E6F
 function CardTodo({ todo = initialTodo }) {
   const [_, setLocation] = useLocation();
   const { color, description, title, id } = todo;
-  const { dispatch } = useContext(TodoContext);
+  const { state, dispatch } = useContext(TodoContext);
 
   const handleDelete = (id) => {
     dispatch({
@@ -29,9 +29,15 @@ function CardTodo({ todo = initialTodo }) {
   };
 
   const handleIscomplete = (id) => {
+  
+    const newTodo = [...state.todos];
+    const todo = newTodo.find(todo => todo.id === id)
+    todo.isComplete = !todo.isComplete;
+    console.log(newTodo)
+
     dispatch({
-      type: actionsTodo.ISCOMPLETE_TASK,
-      payload: id,
+      type: actionsTodo.EDIT_TASK,
+      payload: newTodo,
     });
   }
   return (
