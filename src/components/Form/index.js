@@ -2,10 +2,11 @@ import useForm from "./useForm";
 import { GroupInput, StyledBtnColor, StyledButton } from "./styled";
 import { colors } from "../../utils/color";
 
-function Form({ setData, data }) {
+function Form({ setTodo, todo }) {
+
   const { handleSubmit, handleClickColor, HandleChange, value } = useForm({
-    setData,
-    data,
+    setTodo,
+    todo,
   });
 
   return (
@@ -41,7 +42,7 @@ function Form({ setData, data }) {
         ))}
       </GroupInput>
       <StyledButton onClick={handleSubmit}>
-        {data?.id ? "Editar Tarea" : "Agregar tarea"}
+        {value?.id ? "Editar Tarea" : "Agregar tarea"}
       </StyledButton>
     </form>
   );

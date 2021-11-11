@@ -3,7 +3,7 @@ import useTodos from "../../hooks/useTodos";
 
 const useCardTodo = () => {
   const { dispatch, actionsTodo, state } = useTodos();
-  const [_, setLocation] = useLocation();
+  const [, setLocation] = useLocation();
 
   const handleDelete = (id) => {
     dispatch({

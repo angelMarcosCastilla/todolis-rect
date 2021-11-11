@@ -6,7 +6,6 @@ import { ConatinerListTodo } from "./styled";
 function TodoContainer() {
   const { state } = useContext(TodoContext);
   const { filterTodos } = state;
-  console.log(filterTodos);
   return (
     <ConatinerListTodo>
       {state.todos.length > 0 ? (

@@ -3,11 +3,13 @@ import Container from "../../components/Container";
 import Form from "../../components/Form";
 
 function EditTask({ params }) {
-  const { data, setData } = useEditTask({ params });
+
+  const { todo, setTodo } = useEditTask({ idTodo:parseInt(params.id) });
+  
   return (
     <section>
       <Container>
-        <Form setData={setData} data={data} />
+        <Form setTodo={setTodo} todo={todo} />
       </Container>
     </section>
   );

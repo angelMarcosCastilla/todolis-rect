@@ -1,17 +1,18 @@
 import { useEffect, useState } from "react";
 import useTodos from "../../hooks/useTodos";
 
-const useEditTask = ({params}) => {
+const useEditTask = ({idTodo}) => {
 
   const { state } = useTodos();
-  const [data, setData] = useState({});
-
+  const [todo, setTodo] = useState({});
 
   useEffect(() => {
-    const editData = state.todos.find((data) => data.id == params.id);
-     setData(editData);
-  }, [params, setData, state]);
-  return { data, setData };
+    const editData = state.todos.find((data) => data.id === idTodo);
+     setTodo(editData);
+  }, [setTodo, state, idTodo]);
+
+
+  return { todo, setTodo };
 }
 
 export default useEditTask

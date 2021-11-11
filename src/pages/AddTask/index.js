@@ -17,7 +17,7 @@ function AddTask() {
     <section>
       <Container>
         <Grid columns={2} gap={"10rem"}>
-          <Form setData={setForm} data={form} />
+          <Form setTodo={setForm} todo={form} />
           <CardTodo todo={form} />
         </Grid>
       </Container>
