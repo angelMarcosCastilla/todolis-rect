@@ -6,13 +6,14 @@ import { ConatinerListTodo } from "./styled";
 function TodoContainer() {
   const { state } = useContext(TodoContext);
   const { filterTodos } = state;
-  console.log(filterTodos)
+  console.log(filterTodos);
   return (
     <ConatinerListTodo>
-      {filterTodos.map((todo) => {
-        return <CardTodo key={todo.id} todo={todo} />;
-      })}
-      <CardTodo></CardTodo>
+      {state.todos.length > 0 ? (
+        filterTodos.map((todo) => <CardTodo key={todo.id} todo={todo} />)
+      ) : (
+        <span style={{"margin":"0 auto"}}>No hay todo list</span>
+      )}
     </ConatinerListTodo>
   );
 }

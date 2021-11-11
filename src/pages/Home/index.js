@@ -1,36 +1,11 @@
-import { useContext } from "react";
-import { Link } from "wouter";
+import useHome from "./useHome";
 import Container from "../../components/Container";
 import Label from "../../components/Label";
 import TodoContainer from "../../components/TodoContainer";
-import { TodoContext } from "../../context/TodoContext";
-import { actionsTodo } from "../../context/TodoContext/actions";
+import { StyledLink } from "./styled";
 
 function Home() {
-  const { state, dispatch } = useContext(TodoContext);
-
-  const handleFilterAll = () => {
-    const filterTodos = [...state.todos];
-    console.log(filterTodos);
-    dispatch({
-      type: actionsTodo.FILTER_TASK,
-      payload: filterTodos,
-    });
-  };
-  const handleFilterCompleted = () => {
-    const filterTodos = state.todos.filter((todo) => todo.isComplete === true);
-    dispatch({
-      type: actionsTodo.FILTER_TASK,
-      payload: filterTodos,
-    });
-  };
-  const handleFilterIncompleted = () => {
-    const filterTodos = state.todos.filter((todo) => todo.isComplete === false);
-    dispatch({
-      type: actionsTodo.FILTER_TASK,
-      payload: filterTodos,
-    });
-  };
+  const {handleFilterAll, handleFilterCompleted, handleFilterIncompleted} = useHome();
   return (
     <section>
       <Container>
@@ -46,14 +21,14 @@ function Home() {
               Incompleto
             </Label>
           </div>
-          <Link to="addTask">Agregar Tarea</Link>
+          <StyledLink to="addTask">Agregar Tarea</StyledLink>
         </div>
         <TodoContainer />
       </Container>
     </section>
   );
 }
+ 
 
 
-  
 export default Home;
