@@ -12,6 +12,7 @@ function TodoContainer() {
       {filterTodos.map((todo) => {
         return <CardTodo key={todo.id} todo={todo} />;
       })}
+      <CardTodo></CardTodo>
     </ConatinerListTodo>
   );
 }

@@ -6,6 +6,7 @@ import Home from "./pages/Home";
 import { Route } from "wouter";
 import TodoProvider from "./context/TodoContext";
 import Header from "./components/layout/Header";
+import EditTask from "./pages/EditTask";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
       <TodoProvider>
         <Route path="/" component={Home} />
         <Route path="/addTask" component={AddTask} />
+        <Route path="/editTask/:id" component={EditTask}/> 
       </TodoProvider>
     </>
   );

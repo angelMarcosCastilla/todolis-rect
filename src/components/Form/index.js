@@ -1,31 +1,63 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import { TodoContext } from "../../context/TodoContext";
 import { actionsTodo } from "../../context/TodoContext/actions";
 import { colors } from "../../utils/color";
-import {useLocation} from "wouter";
-function Form({ setData, data }) {
+import { useLocation } from "wouter";
 
-  const {dispatch } = useContext(TodoContext);
+function Form({ setData, data }) {
+  const [value, setValue] = useState({ title: "", description: "", color:"#2E6FCC"});
+  const {state, dispatch } = useContext(TodoContext);
   const [, setLocation] = useLocation();
+
+  useEffect(() => {
+    data.id && setValue(data)
+  },[data])
+
   const HandleChange = (e) => {
-    setData({ ...data, [e.target.name]: e.target.value });
+    setValue({ ...value, [e.target.name]: e.target.value });
+
+    setData((prevState) => {
+      return { ...prevState, [e.target.name]: e.target.value };
+    });
   };
 
   const handleClickColor = (e, color) => {
+
     e.preventDefault();
-    setData({ ...data, color: color });
+    setValue({ ...value, color: color });
+    setData((prevState) => {
+      return { ...prevState, color: color };
+    });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch({
-      type: actionsTodo.ADD_TASK,
-      payload: data,
-    });
-    setLocation("/")
+   
+    if(value.id){
+      console.log(value, state.todos)
+      const editData = state.todos.map((todo) => todo.id === value.id ? value : todo)
+      console.log(editData)
+      dispatch({
+        type: actionsTodo.EDIT_TASK,
+        payload: editData,
+      });
+      setLocation("/");
 
+    }else{
+
+      const data = { ...value, iscomplete: false, id: Date.now() };
+      dispatch({
+        type: actionsTodo.ADD_TASK,
+        payload: data,
+      });
+      setLocation("/");
+
+    }
+
+   
   };
+
   return (
     <form>
       <GroupInput>
@@ -33,17 +65,17 @@ function Form({ setData, data }) {
         <input
           type="text"
           id="titulo"
-          value={data.title}
+          value={value.title}
           name="title"
           onChange={(e) => HandleChange(e)}
         />
       </GroupInput>
       <GroupInput>
-        <label htmlFor="descripcion">Titulo</label>
+        <label htmlFor="descripcion">Descripcion</label>
         <input
           type="text"
           id="descripcion"
-          value={data.description}
+          value={value.description}
           name="description"
           onChange={(e) => HandleChange(e)}
         />
@@ -58,7 +90,9 @@ function Form({ setData, data }) {
           />
         ))}
       </GroupInput>
-      <StyledButton onClick={handleSubmit}>Agregar tarea</StyledButton>
+      <StyledButton onClick={handleSubmit}>
+        {data?.id ? "Editar Tarea" : "Agregar tarea"}
+      </StyledButton>
     </form>
   );
 }

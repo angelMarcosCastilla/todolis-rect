@@ -3,7 +3,7 @@ export const actionsTodo = {
   DELETE_TASK: "Delete task",
   EDIT_TASK: "Edit task",
   FILTER_TASK: "Filter task",
-
+  ISCOMPLETE_TASK: "is task completed"
 };
 
 export const initialState = {
