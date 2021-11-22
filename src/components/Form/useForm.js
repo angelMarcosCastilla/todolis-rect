@@ -2,16 +2,17 @@ import { useEffect, useState } from "react";
 import { useLocation } from "wouter";
 import useTodos from "../../hooks/useTodos";
 
+const initalStateForm = { title: "", description: "", color: "#2E6FCC" };
+
 const useForm = ({ setTodo, todo }) => {
 
-  const {state, dispatch, actionsTodo } = useTodos();
+  const { state, dispatch, actionsTodo } = useTodos();
   const [, setLocation] = useLocation();
-
-  const [value, setValue] = useState({ title: "", description: "", color:"#2E6FCC"});
+  const [value, setValue] = useState(initalStateForm);
 
   useEffect(() => {
     todo.id && setValue(todo)
-  },[todo])
+  }, [todo])
 
   const HandleChange = (e) => {
     setValue({ ...value, [e.target.name]: e.target.value });
@@ -28,12 +29,14 @@ const useForm = ({ setTodo, todo }) => {
     setTodo((prevState) => {
       return { ...prevState, color: color };
     });
+
+    
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-   
-    if(value.id){
+
+    if (value.id) {
       const editData = state.todos.map((data) => data.id === value.id ? value : todo)
       dispatch({
         type: actionsTodo.EDIT_TASK,
@@ -41,7 +44,7 @@ const useForm = ({ setTodo, todo }) => {
       });
       setLocation("/");
 
-    }else{
+    } else {
 
       const data = { ...value, iscomplete: false, id: Date.now() };
       dispatch({
@@ -51,10 +54,9 @@ const useForm = ({ setTodo, todo }) => {
       setLocation("/");
 
     }
-
-   
   };
-  return {handleSubmit, handleClickColor, HandleChange, value}
+
+  return { handleSubmit, handleClickColor, HandleChange, value }
 }
 
 export default useForm
