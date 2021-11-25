@@ -3,8 +3,10 @@ import Container from "../../Container"
 import { HeaderEstyle } from "./styled"
 import Avatar from "components/Avatar"
 import {LogoutOutlined} from "@ant-design/icons"
+import { logout } from "services/users/logout"
+
 function Header({ children }) {
-  const { user } = useUser();
+  const { user, setUser } = useUser();
   return (
     <HeaderEstyle>
       <Container>
@@ -20,7 +22,7 @@ function Header({ children }) {
         }
 
         {
-          user && <button><LogoutOutlined />cerrar sesion</button>
+          user && <button onClick = {()=>logout(setUser)}><LogoutOutlined />cerrar sesion</button>
         }
         </div>
       </Container>
