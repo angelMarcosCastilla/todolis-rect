@@ -3,9 +3,19 @@ import Container from "../../components/Container";
 import Label from "../../components/Label";
 import TodoContainer from "../../components/TodoContainer";
 import { StyledLink } from "./styled";
+import { useEffect, useContext } from "react";
+import { UserContext } from "context/UserContext";
+import { useLocation } from "wouter";
 
 function Home() {
   const {handleFilterAll, handleFilterCompleted, handleFilterIncompleted} = useHome();
+  
+  const {user} = useContext(UserContext)
+  const [location, setLocation] = useLocation()
+  useEffect(()=>{
+    !user && setLocation("/login")
+  },[user,setLocation])
+  
   return (
     <section>
       <Container>
