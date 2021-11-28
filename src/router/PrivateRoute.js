@@ -1,8 +1,8 @@
 import { Redirect, Route } from "wouter"
-const user = null
+import useUser from "hooks/useUser"
 
 function PrivateRoute({component: Component, ...rest}) {
-  
+  const {user} = useUser()
   return (
     <Route {...rest}>
       {
