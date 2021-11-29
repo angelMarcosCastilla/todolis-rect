@@ -1,26 +1,44 @@
 import Button from "components/Button";
 import CircleColor from "components/CircleColor";
+import InfoMenssaje from "components/InfoMessaje";
 import useUser from "hooks/useUser";
+import { useRef, useState } from "react";
+import addTask from "services/task/addTask";
 import { colors } from "utils/color";
 import { InputGroupStyle, InputStyled, LabelStyled } from "./styled";
 
-const Form = ({ value, setValue }) => {
-  const {user} = useUser()
+const Form = ({ value, setValue, setLocation }) => {
+  const { user } = useUser();
+  const [warning, setWarning] = useState(false);
   const handleChange = (e) => {
     setValue({ ...value, [e.target.name]: e.target.value });
   };
 
   const handleSelectcolor = (color) => {
-    setValue({ ...value, color});
+    setValue({ ...value, color });
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault()
-    const sendData = {...value, idUser: user.uid}
-    console.log(sendData)
-  }
+    e.preventDefault();
+    const sendData = { ...value, idUser: user.uid };
+
+    if (sendData.id) {
+      //editar
+    } else {
+      if (value.title.trim() === "" || value.description.trim() === "") {
+        setWarning(true);
+        setTimeout(() => {
+          setWarning(false);
+        }, 1000);
+      } else {
+        addTask(sendData);
+        setLocation("/");
+      }
+    }
+  };
   return (
     <form onSubmit={handleSubmit}>
+      {warning && <InfoMenssaje warning>Hay campos vacios </InfoMenssaje>}
       <InputGroupStyle>
         <LabelStyled htmlFor="title">Título</LabelStyled>
         <InputStyled
@@ -44,9 +62,10 @@ const Form = ({ value, setValue }) => {
       <LabelStyled>Escoge un color</LabelStyled>
       <InputGroupStyle>
         {colors.map((color) => (
-          <CircleColor color={color} onClick={()=>handleSelectcolor(color)} />
+          <CircleColor color={color} onClick={() => handleSelectcolor(color)} />
         ))}
       </InputGroupStyle>
+      <Button>Agregar tarea</Button>
     </form>
   );
 };

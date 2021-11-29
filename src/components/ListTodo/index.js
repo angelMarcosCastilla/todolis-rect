@@ -1,10 +1,15 @@
 import CardTodo from "components/CardTodo";
+import useTask from "hooks/useTask";
 import styled from "styled-components";
 
 function ListTodo() {
+
+  const {tasks} = useTask()
+
+  if(!tasks.tasks) return <strong> cargando...</strong>
   return (
     <ListTodoStyled>
-      <CardTodo color="#77CB6C" />
+      {tasks.tasks.map(res => <CardTodo todo={res}/>)}
     </ListTodoStyled>
   );
 }

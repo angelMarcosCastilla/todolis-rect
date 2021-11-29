@@ -2,8 +2,8 @@ import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import { ButtonAction, CardTodoStyled, CopyCardStyled, TitleCardStyled } from "./styled"
 
 function CardTodo({ todo }) {
+  console.log(todo)
   const{ color, title, description} = todo
-  console.log(todo.id)
   return (
     <CardTodoStyled color={color}>
       <TitleCardStyled>{title || "title"}</TitleCardStyled>
@@ -19,7 +19,6 @@ function CardTodo({ todo }) {
           <EditOutlined />
           editar
         </ButtonAction>
-        <button onClick = {()=>alert("dw")} disabled={!todo.id ?true : false } >sdhfdkf</button>
       </div>
     </CardTodoStyled>
   );

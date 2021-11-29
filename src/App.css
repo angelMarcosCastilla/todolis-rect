@@ -25,7 +25,9 @@ button {
   font-size: 1rem;
   color: #758092;
 }
-
+form{
+  position: relative;
+}
 button > span {
   margin-right: 5px;
 }

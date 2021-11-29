@@ -8,19 +8,22 @@ import Login from "pages/Login";
 import EditTask from "pages/EditTask";
 import ErrorPage from "pages/ErrorPage";
 import Header from "layout/Header";
+import TaskProvider from "context/TaskContext";
 
 function App() {
   return (
     <>
       <UserProvider>
-        <Header/>
-        <Switch>
-          <Route path="/login" component={Login} />
-          <PrivateRoute path="/" component={Home} />
-          <PrivateRoute path="/addTask" component={AddTask} />
-          <PrivateRoute path="/editTask/:id" component={EditTask} />
-          <Route component={ErrorPage} />
-        </Switch>
+        <Header />
+        <TaskProvider>
+          <Switch>
+            <Route path="/login" component={Login} />
+            <PrivateRoute path="/" component={Home} />
+            <PrivateRoute path="/addTask" component={AddTask} />
+            <PrivateRoute path="/editTask/:id" component={EditTask} />
+            <Route component={ErrorPage} />
+          </Switch>
+        </TaskProvider>
       </UserProvider>
     </>
   );
