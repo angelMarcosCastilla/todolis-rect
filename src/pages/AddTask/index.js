@@ -1,9 +1,28 @@
+import CardTodo from "components/CardTodo";
+import Container from "components/Container";
+import Form from "components/Form";
+import Grid from "layout/Grid";
+import { useState } from "react";
+
+const initialState = {
+  title: "",
+  description: "",
+  color: "#2196F3",
+};
+
 function AddTask() {
+  const [value, setValue] = useState(initialState);
+
   return (
-    <div>
-      agregar tarea
-    </div>
-  )
+    <section>
+      <Container column={2}>
+        <Grid>
+          <Form value={value} setValue={setValue} />
+          <CardTodo todo={value} />
+        </Grid>
+      </Container>
+    </section>
+  );
 }
 
-export default AddTask
+export default AddTask;
