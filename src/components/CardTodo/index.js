@@ -2,7 +2,6 @@ import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import { ButtonAction, CardTodoStyled, CopyCardStyled, TitleCardStyled } from "./styled"
 
 function CardTodo({ todo }) {
-  console.log(todo)
   const{ color, title, description} = todo
   return (
     <CardTodoStyled color={color}>

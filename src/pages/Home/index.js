@@ -12,7 +12,7 @@ import { tasksAction } from "context/TaskContext/actions";
 function Home() {
   const { user } = useUser();
   const { dispatch } = useTask();
-  
+
   useEffect(() => {
     user &&
       getTasks(user.uid).then((res) => {

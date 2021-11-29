@@ -2,7 +2,7 @@ import Button from "components/Button";
 import CircleColor from "components/CircleColor";
 import InfoMenssaje from "components/InfoMessaje";
 import useUser from "hooks/useUser";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import addTask from "services/task/addTask";
 import { colors } from "utils/color";
 import { InputGroupStyle, InputStyled, LabelStyled } from "./styled";
@@ -10,6 +10,7 @@ import { InputGroupStyle, InputStyled, LabelStyled } from "./styled";
 const Form = ({ value, setValue, setLocation }) => {
   const { user } = useUser();
   const [warning, setWarning] = useState(false);
+
   const handleChange = (e) => {
     setValue({ ...value, [e.target.name]: e.target.value });
   };
@@ -62,7 +63,7 @@ const Form = ({ value, setValue, setLocation }) => {
       <LabelStyled>Escoge un color</LabelStyled>
       <InputGroupStyle>
         {colors.map((color) => (
-          <CircleColor color={color} onClick={() => handleSelectcolor(color)} />
+          <CircleColor color={color} key={color} onClick={() => handleSelectcolor(color)} />
         ))}
       </InputGroupStyle>
       <Button>Agregar tarea</Button>

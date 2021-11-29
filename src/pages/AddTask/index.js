@@ -2,7 +2,7 @@ import CardTodo from "components/CardTodo";
 import Container from "components/Container";
 import Form from "components/Form";
 import Grid from "layout/Grid";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useLocation } from "wouter";
 
 const initialState = {
@@ -12,7 +12,7 @@ const initialState = {
 };
 
 function AddTask() {
-  const [,setLocation] = useLocation()
+  const [, setLocation] = useLocation();
   const [value, setValue] = useState(initialState);
 
   return (

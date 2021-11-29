@@ -9,7 +9,7 @@ function ListTodo() {
   if(!tasks.tasks) return <strong> cargando...</strong>
   return (
     <ListTodoStyled>
-      {tasks.tasks.map(res => <CardTodo todo={res}/>)}
+      {tasks.tasks.map(res => <CardTodo key={res.id} todo={res}/>)}
     </ListTodoStyled>
   );
 }
