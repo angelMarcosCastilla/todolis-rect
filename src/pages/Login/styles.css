@@ -1,0 +1,19 @@
+.pageLogin{
+  width: 100%;
+}
+
+.loginContent{
+  margin-top: 50vh;
+  margin-left: auto;
+  margin-right: auto;
+  transform: translateY(-50%);
+  width: 95%;
+  max-width: 450px;
+  padding:30px  20px;
+  background-color: #fff;
+
+}
+
+.loginContent__text{
+  color: rgb(18, 18, 37);
+}

@@ -1,16 +1,22 @@
-import {createContext, useState} from "react";
+import { createContext, useEffect, useState } from "react";
+import { stateUserChanged } from "services/users/login";
 
 const UserContext = createContext();
 
-function UserProvider({children}) {
-  const [user, setUser] = useState(null);
-  const data = { user, setUser}
+function UserProvider({ children }) {
+  const [user, setUser] = useState(undefined);
+
+  useEffect(() => {
+    stateUserChanged(setUser);
+  }, []);
+  const data = { user, setUser };
+
   return (
-    <UserContext.Provider value={data}>
-      {children}
-    </UserContext.Provider>
-  )
+    <>
+      <UserContext.Provider value={data}>{children}</UserContext.Provider>
+    </>
+  );
 }
 
-export  {UserContext}
-export  default UserProvider
+export { UserContext };
+export default UserProvider;

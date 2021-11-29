@@ -32,11 +32,16 @@ button > span {
 .flex{
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 10px;
 }
 .space-between{
   justify-content: space-between;
 }
 .mb-2{
   margin-bottom: 2rem;
+}
+
+.contentCenter{
+  display: grid;
+  place-content: center;
 }

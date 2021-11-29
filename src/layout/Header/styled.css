@@ -1,0 +1,11 @@
+.userName{
+  font-size: 1.2rem;
+  text-transform: capitalize;
+}
+
+.btnLogout{
+  font-size: 1.1rem;
+}
+.btnLogout:hover{
+  color: rgba(0, 0, 0, .4);
+}

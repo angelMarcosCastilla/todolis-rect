@@ -7,11 +7,13 @@ import Home from "pages/Home";
 import Login from "pages/Login";
 import EditTask from "pages/EditTask";
 import ErrorPage from "pages/ErrorPage";
+import Header from "layout/Header";
 
 function App() {
   return (
     <>
       <UserProvider>
+        <Header/>
         <Switch>
           <Route path="/login" component={Login} />
           <PrivateRoute path="/" component={Home} />
