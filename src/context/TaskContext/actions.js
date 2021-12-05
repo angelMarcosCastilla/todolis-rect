@@ -5,5 +5,6 @@ export  const  initialState = {
 }
 
 export const tasksAction = {
-  LOAD_TASK: "LOAD TASK"
+  LOAD_TASK: "LOAD TASK",
+  DELETE_TASK: "DELETE TASK"
 }

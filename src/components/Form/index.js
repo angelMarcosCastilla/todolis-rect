@@ -4,11 +4,13 @@ import InfoMenssaje from "components/InfoMessaje";
 import useUser from "hooks/useUser";
 import { useState } from "react";
 import addTask from "services/task/addTask";
+import editTask from "services/task/editTask";
 import { colors } from "utils/color";
 import { InputGroupStyle, InputStyled, LabelStyled } from "./styled";
 
 const Form = ({ value, setValue, setLocation }) => {
   const { user } = useUser();
+
   const [warning, setWarning] = useState(false);
 
   const handleChange = (e) => {
@@ -24,7 +26,7 @@ const Form = ({ value, setValue, setLocation }) => {
     const sendData = { ...value, idUser: user.uid };
 
     if (sendData.id) {
-      //editar
+      editTask(sendData.id, sendData);
     } else {
       if (value.title.trim() === "" || value.description.trim() === "") {
         setWarning(true);
@@ -33,9 +35,10 @@ const Form = ({ value, setValue, setLocation }) => {
         }, 1000);
       } else {
         addTask(sendData);
-        setLocation("/");
       }
     }
+
+    setLocation("/");
   };
   return (
     <form onSubmit={handleSubmit}>
@@ -63,10 +66,14 @@ const Form = ({ value, setValue, setLocation }) => {
       <LabelStyled>Escoge un color</LabelStyled>
       <InputGroupStyle>
         {colors.map((color) => (
-          <CircleColor color={color} key={color} onClick={() => handleSelectcolor(color)} />
+          <CircleColor
+            color={color}
+            key={color}
+            onClick={() => handleSelectcolor(color)}
+          />
         ))}
       </InputGroupStyle>
-      <Button>Agregar tarea</Button>
+      <Button>{value.id ? "Editar Tarea" : "Agregar Tarea"}</Button>
     </form>
   );
 };

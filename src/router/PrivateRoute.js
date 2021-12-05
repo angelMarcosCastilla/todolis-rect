@@ -5,15 +5,10 @@ function PrivateRoute({component: Component, ...rest}) {
   const {user} = useUser()
 
   if(user === undefined) return null
-  
+  if(!user) return <Redirect to="/login"/>
+
   return (
-    <Route {...rest}>
-      {
-        !user
-        ? <Redirect to="/login"/>
-        : <Component/>
-      }
-    </Route>
+    <Route component={Component} {...rest}/>
   )
 }
 

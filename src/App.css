@@ -16,7 +16,11 @@ body {
 ul {
   list-style: none;
 }
+a{
+  text-decoration: none;
+  color: #758092;
 
+}
 button {
   border: none;
   background-color: transparent;
