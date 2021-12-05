@@ -14,7 +14,7 @@ function Login() {
     <section className="pageLogin">
       <div className="loginContent">
         <h2 className="mb-2 loginContent__text">Inicia Sesión con tu:</h2>
-        <Button onClick={loginWithGoogle} bg="#ff6347"> Cuenta de Googler</Button>
+        <Button onClick={loginWithGoogle} bg="#ff6347"> Cuenta de Google</Button>
         <Button onClick={loginWithGithub} bg="#3e4444"> Cuenta de Github</Button>
       </div>
     </section>
