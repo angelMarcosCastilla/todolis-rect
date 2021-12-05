@@ -10,5 +10,10 @@ const GridStyled = styled.div`
   align-items: center;
   grid-template-columns: repeat(2, 1fr);
   gap: 10rem;
+  
+  @media screen and (max-width : 700px){
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
 `;
 export default Grid;
