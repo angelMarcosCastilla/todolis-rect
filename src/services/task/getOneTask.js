@@ -7,13 +7,13 @@ async function getOneTask(idUser, id) {
     where("idUser", "==", `${idUser}`),
     where("id", "==", `${id}`)
   );
+  let result;
 
   const querySnapshot = await getDocs(q);
-  let result;
+  
   querySnapshot.forEach((doc) => {
     result = doc.data();
   });
-
   return result;
 }
 

@@ -7,7 +7,7 @@ import Grid from "layout/Grid";
 import { useEffect, useState } from "react";
 import getOneTask from "services/task/getOneTask";
 import { useLocation } from "wouter";
-import Loader from "components/Loader"
+import Loader from "components/Loader";
 
 function EditTask({ params }) {
   const { id } = params;
@@ -16,15 +16,16 @@ function EditTask({ params }) {
   const [, setLocation] = useLocation();
 
   const [value, setValue] = useState(() => {
+
     if (tasks.tasks) return tasks.tasks.find((todo) => todo.id === id);
     return null;
   });
 
-  useEffect(() => {
-    getOneTask(user.uid, id).then(setValue);
-  }, [id, user.uid]);
-
-  if (!value) return <Loader/>;
+useEffect(() => {
+    !value  && getOneTask(user.uid, id).then(setValue);
+  }, [value, id, user.uid]); 
+  
+  if (!value) return <Loader />;
 
   return (
     <section>
